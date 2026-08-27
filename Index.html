@@ -1070,19 +1070,41 @@
   document.getElementById('rsvpBtn').href = CONFIG.rsvpUrl;
 
   /* ---------------- Opening / curtain reveal ---------------- */
-  const openBtn = document.getElementById('openBtn');
-  const opening = document.getElementById('opening');
-  const curtain = document.getElementById('curtain');
+const openBtn = document.getElementById('openBtn');
+const opening = document.getElementById('opening');
+const curtain = document.getElementById('curtain');
 
-  function openInvitation(){
-    curtain.classList.add('animate');
-    opening.classList.add('hide');
-    setTimeout(()=>{
-      document.body.classList.remove('locked');
-      curtain.style.display = 'none';
-    }, reduceMotion ? 0 : 1450);
-  }
+// Preview mode: ?preview=true skips the opening screen
+// so portfolio screenshot services capture the main hero section.
+const isPreview =
+  new URLSearchParams(window.location.search).get('preview') === 'true';
+
+function openInvitation(){
+  curtain.classList.add('animate');
+  opening.classList.add('hide');
+
+  setTimeout(()=>{
+    document.body.classList.remove('locked');
+    curtain.style.display = 'none';
+  }, reduceMotion ? 0 : 1450);
+}
+
+if(isPreview){
+  // Hide the Tap to Open screen immediately
+  opening.style.display = 'none';
+  curtain.style.display = 'none';
+
+  // Unlock scrolling
+  document.body.classList.remove('locked');
+
+  // Make hero content visible immediately for the screenshot
+  document.querySelectorAll('#hero [data-reveal]').forEach((el)=>{
+    el.classList.add('is-visible');
+  });
+} else {
+  // Normal visitor experience
   openBtn.addEventListener('click', openInvitation);
+}
 
   /* ---------------- Hero floating particles ---------------- */
   if(!reduceMotion){
