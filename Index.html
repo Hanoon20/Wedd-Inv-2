@@ -262,6 +262,20 @@
   .reveal-delay-2.in{ transition-delay: .2s; }
   .reveal-delay-3.in{ transition-delay: .3s; }
 
+  /* Hero entrance — triggered on "Tap to Open", not on scroll */
+  .hero-reveal{
+    opacity:0;
+    transform: translateY(22px);
+    transition: opacity .9s var(--ease), transform .9s var(--ease);
+  }
+  .hero-reveal.in{ opacity:1; transform: translateY(0); }
+  .hero-delay-0.in{ transition-delay: .05s; }
+  .hero-delay-1.in{ transition-delay: .18s; }
+  .hero-delay-2.in{ transition-delay: .32s; }
+  .hero-delay-3.in{ transition-delay: .46s; }
+  .hero-delay-4.in{ transition-delay: .58s; }
+  .hero-delay-5.in{ transition-delay: .7s; }
+
   @media (prefers-reduced-motion: reduce){
     *{ animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
     .reveal{ opacity:1; transform:none; }
@@ -392,7 +406,8 @@
   }
   .hero-meta-item .num{
     font-family: var(--font-display);
-    font-size: 26px;
+    font-size: clamp(30px, 6vw, 42px);
+    font-weight: 500;
   }
   .hero-meta-item .lbl{
     font-size: 11px;
@@ -480,7 +495,7 @@
     color: var(--rose-deep); font-weight:600; margin-bottom:8px;
   }
   .story-title{ font-size: 24px; margin-bottom: 10px; }
-  .story-text{ color: var(--ink-soft); line-height:1.75; font-size:15.5px; max-width: 440px; }
+  .story-text{ color: var(--ink-soft); line-height:1.65; font-size:13.5px; max-width: 400px; }
 
   /* ================= COUPLE ================= */
   .couple-grid{
@@ -879,17 +894,17 @@
       <div class="story-item reveal" data-reveal>
         <div class="story-kicker">Chapter One</div>
         <h3 class="story-title">A Beginning</h3>
-        <p class="story-text">A beautiful connection that slowly became something special — two paths that quietly began to move as one.</p>
+        <p class="story-text">A quiet beginning that slowly became something special.</p>
       </div>
       <div class="story-item reveal" data-reveal>
         <div class="story-kicker">Chapter Two</div>
         <h3 class="story-title">Falling in Love</h3>
-        <p class="story-text">Through laughter, memories, conversations, and countless small moments together, what began quietly grew into something certain.</p>
+        <p class="story-text">Laughter, memories, and countless moments brought them closer.</p>
       </div>
       <div class="story-item reveal" data-reveal>
         <div class="story-kicker">Chapter Three</div>
         <h3 class="story-title">Choosing Forever</h3>
-        <p class="story-text">And now, surrounded by the people they love, Aqeel &amp; Hana begin their next chapter together — as one.</p>
+        <p class="story-text">Now, surrounded by loved ones, they begin forever — together.</p>
       </div>
     </div>
   </div>
@@ -910,7 +925,7 @@
         </div>
         <div class="couple-role">The Groom</div>
         <h3 class="couple-name">Aqeel</h3>
-        <p class="couple-note">Photo coming soon — this space is ready whenever you are.</p>
+        <p class="couple-note">Loving, steady, and ready for forever.</p>
       </div>
       <div class="couple-card reveal reveal-delay-1" data-reveal>
         <div class="couple-frame" data-fallback-heart>
@@ -919,7 +934,7 @@
         </div>
         <div class="couple-role">The Bride</div>
         <h3 class="couple-name">Hana</h3>
-        <p class="couple-note">Photo coming soon — this space is ready whenever you are.</p>
+        <p class="couple-note">Radiant, warm, and full of grace.</p>
       </div>
     </div>
   </div>
