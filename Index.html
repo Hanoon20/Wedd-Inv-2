@@ -816,7 +816,7 @@
   </div>
   <div class="hero-content">
     <div class="hero-tag reveal" data-reveal>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21s-7-4.35-9.5-8.5C.7 8.9 2.7 5.5 6 5.5c2 0 3.3 1.1 4 2.2.7-1.1 2-2.2 4-2.2 3.3 0 5.3 3.4 3.5 7C19 16.65 12 21 12 21z"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
       Waleema Function
     </div>
     <div class="eyebrow hero-eyebrow reveal" data-reveal>Together With Their Families</div>
@@ -875,7 +875,7 @@
     <div class="couple-grid">
       <div class="couple-card reveal" data-reveal>
         <div class="couple-frame">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 21s-7-4.35-9.5-8.5C.7 8.9 2.7 5.5 6 5.5c2 0 3.3 1.1 4 2.2.7-1.1 2-2.2 4-2.2 3.3 0 5.3 3.4 3.5 7C19 16.65 12 21 12 21z"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
         </div>
         <div class="couple-role">The Groom</div>
         <h3 class="couple-name">Aqeel</h3>
@@ -883,7 +883,7 @@
       </div>
       <div class="couple-card reveal reveal-delay-1" data-reveal>
         <div class="couple-frame">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 21s-7-4.35-9.5-8.5C.7 8.9 2.7 5.5 6 5.5c2 0 3.3 1.1 4 2.2.7-1.1 2-2.2 4-2.2 3.3 0 5.3 3.4 3.5 7C19 16.65 12 21 12 21z"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
         </div>
         <div class="couple-role">The Bride</div>
         <h3 class="couple-name">Hana</h3>
@@ -1070,41 +1070,19 @@
   document.getElementById('rsvpBtn').href = CONFIG.rsvpUrl;
 
   /* ---------------- Opening / curtain reveal ---------------- */
-const openBtn = document.getElementById('openBtn');
-const opening = document.getElementById('opening');
-const curtain = document.getElementById('curtain');
+  const openBtn = document.getElementById('openBtn');
+  const opening = document.getElementById('opening');
+  const curtain = document.getElementById('curtain');
 
-// Preview mode: ?preview=true skips the opening screen
-// so portfolio screenshot services capture the main hero section.
-const isPreview =
-  new URLSearchParams(window.location.search).get('preview') === 'true';
-
-function openInvitation(){
-  curtain.classList.add('animate');
-  opening.classList.add('hide');
-
-  setTimeout(()=>{
-    document.body.classList.remove('locked');
-    curtain.style.display = 'none';
-  }, reduceMotion ? 0 : 1450);
-}
-
-if(isPreview){
-  // Hide the Tap to Open screen immediately
-  opening.style.display = 'none';
-  curtain.style.display = 'none';
-
-  // Unlock scrolling
-  document.body.classList.remove('locked');
-
-  // Make hero content visible immediately for the screenshot
-  document.querySelectorAll('#hero [data-reveal]').forEach((el)=>{
-    el.classList.add('is-visible');
-  });
-} else {
-  // Normal visitor experience
+  function openInvitation(){
+    curtain.classList.add('animate');
+    opening.classList.add('hide');
+    setTimeout(()=>{
+      document.body.classList.remove('locked');
+      curtain.style.display = 'none';
+    }, reduceMotion ? 0 : 1450);
+  }
   openBtn.addEventListener('click', openInvitation);
-}
 
   /* ---------------- Hero floating particles ---------------- */
   if(!reduceMotion){
