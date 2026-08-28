@@ -516,6 +516,11 @@
     50%{ transform: translateY(-8px); }
   }
   .couple-frame svg{ width: 46px; height:46px; color: var(--rose-deep); opacity:.55; }
+  .couple-frame img{
+    width:100%; height:100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
   .couple-role{ font-size:11px; letter-spacing:.2em; text-transform:uppercase; color: var(--ink-soft); }
   .couple-name{ font-size: 32px; margin-top:10px; }
   .couple-note{ margin-top:14px; color: var(--ink-soft); font-size:14.5px; line-height:1.7; }
@@ -688,6 +693,10 @@
   .gallery-item .gnum{
     position:absolute; bottom:10px; right:12px;
     font-size:11px; letter-spacing:.1em; color: rgba(43,35,48,0.35);
+  }
+  .gallery-item img{
+    width:100%; height:100%;
+    object-fit: cover;
   }
 
   .lightbox{
@@ -1057,7 +1066,14 @@
     googleMapsEmbedSrc: "https://www.google.com/maps?q=Haiba+Hall+Thihariya+Gampaha&output=embed",
     googleMapsDirectionsUrl: "https://www.google.com/maps/dir/?api=1&destination=Haiba+Hall+Thihariya+Gampaha",
     rsvpUrl: "https://wa.me/00000000000?text=Assalamualaikum!%20I%20would%20love%20to%20join%20Aqeel%20%26%20Hana's%20wedding%20celebration.",
-    galleryCount: 6
+    galleryPhotos: [
+      "photo1.jpg",
+      "photo2.jpg",
+      "photo3.jpg",
+      "photo4.jpg",
+      "photo5.jpg",
+      "photo6.jpg"
+    ]
   };
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1162,16 +1178,25 @@
   const lightboxBox = document.getElementById('lightboxBox');
   const lightboxClose = document.getElementById('lightboxClose');
 
-  for(let i=1;i<=CONFIG.galleryCount;i++){
+  CONFIG.galleryPhotos.forEach((src, idx)=>{
+    const i = idx + 1;
     const item = document.createElement('div');
     item.className = 'gallery-item';
-    item.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span class="gnum">'+pad(i)+'</span>';
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = 'Aqeel & Hana — photo ' + i;
+    img.loading = 'lazy';
+    img.onerror = function(){
+      // shows a placeholder icon if the photo file isn't found yet
+      item.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span class="gnum">'+pad(i)+'</span>';
+    };
+    item.appendChild(img);
     item.addEventListener('click', ()=>{
-      lightboxBox.textContent = 'Photo ' + i;
+      lightboxBox.innerHTML = '<img src="'+src+'" alt="Aqeel & Hana — photo '+i+'" style="width:100%;height:100%;object-fit:cover;border-radius:20px;">';
       lightbox.classList.add('open');
     });
     galleryGrid.appendChild(item);
-  }
+  });
   lightboxClose.addEventListener('click', ()=> lightbox.classList.remove('open'));
   lightbox.addEventListener('click', (e)=>{ if(e.target === lightbox) lightbox.classList.remove('open'); });
   document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') lightbox.classList.remove('open'); });
